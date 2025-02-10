@@ -1,0 +1,10 @@
+[project]
+name = "money-maker"
+version = "0.1.0"
+description = "Investment app that helps you make money."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "jupyterlab>=4.3.5",
+    "yfinance>=0.2.52",
+]
