@@ -6,25 +6,6 @@ Investment app that helps you make money.
 uv run jupyter lab
 ```
 
-Help on class Ticker in module yfinance.ticker:
-
-class Ticker(yfinance.base.TickerBase)
- |  Ticker(ticker, session=None, proxy=None)
- |  
- |  Method resolution order:
- |      Ticker
- |      yfinance.base.TickerBase
- |      builtins.object
- |  
- |  Methods defined here:
- |  
- |  __init__(self, ticker, session=None, proxy=None)
- |      Initialize self.  See help(type(self)) for accurate signature.
- |  
- |  __repr__(self)
- |      Return repr(self).
- |  
- |  option_chain(self, date=None, tz=None)
  |  
  |  ----------------------------------------------------------------------
  |  Readonly properties defined here:
@@ -130,12 +111,13 @@ class Ticker(yfinance.base.TickerBase)
  |  Methods inherited from yfinance.base.TickerBase:
  |  
  |  get_actions(self, proxy=None) -> pandas.core.series.Series
- |  * dividen dates and stock splits
+dividen dates and stock splits
 
  |  get_analyst_price_targets(self, proxy=None) -> dict
  |      Keys:   current  low  high  mean  median
-    * price targets
+price targets
 
+ |  get_balancesheet(self, proxy=None, as_dict=False, pretty=False, freq='yearly')
  |  get_balance_sheet(self, proxy=None, as_dict=False, pretty=False, freq='yearly')
  |      :Parameters:
  |          as_dict: bool
@@ -151,12 +133,20 @@ class Ticker(yfinance.base.TickerBase)
  |              Optional. Proxy server URL scheme
  |              Default is None
  |  
- |  get_balancesheet(self, proxy=None, as_dict=False, pretty=False, freq='yearly')
  |  
  |  get_calendar(self, proxy=None) -> dict
- |  
+Earnings Date [datetime.date(2025, 4, 23), datetime.date(2025, 5, 3)]
+Earnings High 0.82
+Earnings Low 0.24
+Earnings Average 0.52124
+Revenue High 27069000000
+Revenue Low 21538000000
+Revenue Average 23976313660
+
  |  get_capital_gains(self, proxy=None) -> pandas.core.series.Series
- |  
+? Broken ?
+
+ |  get_cashflow(self, proxy=None, as_dict=False, pretty=False, freq='yearly')
  |  get_cash_flow(self, proxy=None, as_dict=False, pretty=False, freq='yearly') -> Union[pandas.core.frame.DataFrame, dict]
  |      :Parameters:
  |          as_dict: bool
@@ -171,8 +161,7 @@ class Ticker(yfinance.base.TickerBase)
  |          proxy: str
  |              Optional. Proxy server URL scheme
  |              Default is None
- |  
- |  get_cashflow(self, proxy=None, as_dict=False, pretty=False, freq='yearly')
+
  |  
  |  get_dividends(self, proxy=None) -> pandas.core.series.Series
  |  
@@ -187,7 +176,8 @@ class Ticker(yfinance.base.TickerBase)
  |          proxy: str
  |              Optional. Proxy server URL scheme
  |              Default is None
- |  
+Just like the name sounds
+
  |  get_earnings_dates(self, limit=12, proxy=None) -> Optional[pandas.core.frame.DataFrame]
  |      Get earning dates (future and historic)
  |      
@@ -199,36 +189,54 @@ class Ticker(yfinance.base.TickerBase)
  |      
  |      Returns:
  |          pd.DataFrame
- |  
+Just like the name sounds
+
  |  get_earnings_estimate(self, proxy=None, as_dict=False)
  |      Index:      0q  +1q  0y  +1y
  |      Columns:    numberOfAnalysts  avg  low  high  yearAgoEps  growth
- |  
+
  |  get_earnings_history(self, proxy=None, as_dict=False)
  |      Index:      pd.DatetimeIndex
  |      Columns:    epsEstimate  epsActual  epsDifference  surprisePercent
- |  
- |  get_eps_revisions(self, proxy=None, as_dict=False)
- |      Index:      0q  +1q  0y  +1y
- |      Columns:    upLast7days  upLast30days  downLast7days  downLast30days
+
  |  
  |  get_eps_trend(self, proxy=None, as_dict=False)
  |      Index:      0q  +1q  0y  +1y
  |      Columns:    current  7daysAgo  30daysAgo  60daysAgo  90daysAgo
- |  
+Just like the name sounds
+
  |  get_fast_info(self, proxy=None)
- |  
+[('currency', 'USD'),
+ ('dayHigh', 346.3999938964844),
+ ('dayLow', 329.1199951171875),
+ ('exchange', 'NMS'),
+ ('fiftyDayAverage', 401.7293994140625),
+ ('lastPrice', 336.510009765625),
+ ('lastVolume', 104520600),
+ ('marketCap', 1082391155074.6875),
+ ('open', 329.94000244140625),
+ ('previousClose', 326.93),
+ ('quoteType', 'EQUITY'),
+ ('regularMarketPreviousClose', 328.5),
+ ('shares', 3216519936),
+ ('tenDayAverageVolume', 83848410),
+ ('threeMonthAverageVolume', 83828873),
+ ('timezone', 'America/New_York'),
+ ('twoHundredDayAverage', 270.4983000946045),
+ ('yearChange', 0.7832123246959583),
+ ('yearHigh', 488.5400085449219),
+ ('yearLow', 138.8000030517578)]
+
  |  get_financials(self, proxy=None, as_dict=False, pretty=False, freq='yearly')
- |  
- |  get_funds_data(self, proxy=None) -> Optional[yfinance.scrapers.funds.FundsData]
+? Seems like income statement ?
  |  
  |  get_growth_estimates(self, proxy=None, as_dict=False)
  |      Index:      0q  +1q  0y  +1y +5y -5y
  |      Columns:    stock  industry  sector  index
- |  
- |  get_history_metadata(self, proxy=None) -> dict
+? Percent of how much they expect it to grow ?
  |  
  |  get_income_stmt(self, proxy=None, as_dict=False, pretty=False, freq='yearly')
+ |  get_incomestmt(self, proxy=None, as_dict=False, pretty=False, freq='yearly')
  |      :Parameters:
  |          as_dict: bool
  |              Return table as Python dict
@@ -243,19 +251,49 @@ class Ticker(yfinance.base.TickerBase)
  |              Optional. Proxy server URL scheme
  |              Default is None
  |  
- |  get_incomestmt(self, proxy=None, as_dict=False, pretty=False, freq='yearly')
- |  
+Just like it sounds
+
  |  get_info(self, proxy=None) -> dict
- |  
- |  get_insider_purchases(self, proxy=None, as_dict=False)
- |  
- |  get_insider_roster_holders(self, proxy=None, as_dict=False)
- |  
- |  get_insider_transactions(self, proxy=None, as_dict=False)
- |  
- |  get_institutional_holders(self, proxy=None, as_dict=False)
- |  
- |  get_isin(self, proxy=None) -> Optional[str]
+industry 
+previousClose 
+trailingPE 161.00958
+forwardPE 89.281975
+volume 103935563
+regularMarketVolume 103935563
+averageVolume 82773476
+averageVolume10days 80199710
+averageDailyVolume10Day 80199710
+bid 330.0
+ask 348.0
+bidSize 100
+askSize 100
+marketCap 1082391134208
+fiftyTwoWeekLow 138.8
+fiftyTwoWeekHigh 488.54
+fiftyDayAverage 401.657
+twoHundredDayAverage 269.66666
+profitMargins 0.13075
+recommendationMean 2.74468
+recommendationKey hold
+numberOfAnalystOpinions 42
+totalCash 33648001024
+totalCashPerShare 10.482
+ebitda 13244000256
+totalDebt 12782999552
+quickRatio 1.214
+currentRatio 1.844
+totalRevenue 97150001152
+debtToEquity 18.078
+revenuePerShare 30.457
+returnOnAssets 0.04759
+returnOnEquity 0.20389
+grossProfits 17709000704
+freeCashflow 676625024
+operatingCashflow 14478999552
+earningsGrowth 0.17
+revenueGrowth 0.078
+grossMargins 0.18229
+
  |  
  |  get_major_holders(self, proxy=None, as_dict=False)
 Percent of insiders/institutions own the shares
